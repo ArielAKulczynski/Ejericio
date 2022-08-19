@@ -8,7 +8,10 @@ using System.Threading.Tasks;
 
 namespace Ejercicio.Controllers
 {
-    public class MovimientoController : Controller
+
+    [Route("api/[controller]")]
+    [ApiController]
+    public class MovimientoController : ControllerBase
     {
         private readonly IMediator _mediator;
         public MovimientoController(IMediator mediator)

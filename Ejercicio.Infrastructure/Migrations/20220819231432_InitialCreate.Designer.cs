@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Ejercicio.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20220819162721_InitialCreate")]
+    [Migration("20220819231432_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -64,24 +64,21 @@ namespace Ejercicio.Infrastructure.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("ClienteIdPersonaID")
+                    b.Property<int>("ClienteId")
                         .HasColumnType("int");
 
-                    b.Property<int>("PersonaID")
-                        .HasColumnType("int");
-
-                    b.Property<string>("estado")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<bool>("estado")
+                        .HasColumnType("bit");
 
                     b.Property<int>("saldoInicial")
                         .HasColumnType("int");
 
-                    b.Property<int>("tipoCuenta")
-                        .HasColumnType("int");
+                    b.Property<string>("tipoCuenta")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("numeroCuenta");
 
-                    b.HasIndex("ClienteIdPersonaID");
+                    b.HasIndex("ClienteId");
 
                     b.ToTable("Cuentas");
                 });
@@ -128,11 +125,13 @@ namespace Ejercicio.Infrastructure.Migrations
 
             modelBuilder.Entity("Ejercicio.Core.Entidades.Cuenta", b =>
                 {
-                    b.HasOne("Ejercicio.Core.Entidades.Cliente", "ClienteId")
+                    b.HasOne("Ejercicio.Core.Entidades.Cliente", "Cliente")
                         .WithMany("clienteCuenta")
-                        .HasForeignKey("ClienteIdPersonaID");
+                        .HasForeignKey("ClienteId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Navigation("ClienteId");
+                    b.Navigation("Cliente");
                 });
 
             modelBuilder.Entity("Ejercicio.Core.Entidades.Movimiento", b =>

@@ -8,7 +8,10 @@ using System.Threading.Tasks;
 
 namespace Ejercicio.Controllers
 {
-    public class CuentaController : Controller
+
+    [Route("api/[controller]")]
+    [ApiController]
+    public class CuentaController : ControllerBase
     {
         private readonly IMediator _mediator;
         public CuentaController(IMediator mediator)

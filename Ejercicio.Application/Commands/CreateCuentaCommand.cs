@@ -10,11 +10,10 @@ namespace Ejercicio.Application.Commands
 {
     public class CreateCuentaCommand: IRequest<CuentaResponse>
 	{
-		public string nombre { get; set; }
-		public string genero { get; set; }
-		public int edad { get; set; }
-		public int identificación { get; set; }
-		public string dirección { get; set; }
-		public int teléfono { get; set; }
-    }
+	    public int clienteId { get; set; }
+		public int numeroCuenta { get; set; }
+		public string tipoCuenta { get; set; }
+		public int saldoInicial { get; set; }
+		public bool estado { get; set; }
+	}
 }

@@ -10,14 +10,16 @@ namespace Ejercicio.Core.Entidades
 {
    public class Cuenta
     {
-		[ForeignKey("PersonaID")]
-		public int PersonaID { get; set; }
+		
 		[Key]
 		[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
 		public int numeroCuenta { get; set; }
-		public int tipoCuenta { get; set; }
+		[ForeignKey("Cliente")]
+		public int ClienteId { get; set; }
+		public virtual Cliente Cliente { get; set; }
+		public string tipoCuenta { get; set; }
 		public int saldoInicial { get; set; }
-		public string estado { get; set; }
-		public virtual Cliente ClienteId { get; set; }
+		public bool estado { get; set; }
+		
 	}
 }

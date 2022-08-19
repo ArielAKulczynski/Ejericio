@@ -11,8 +11,9 @@ namespace Ejercicio.Application.Responses
 		public string nombre { get; set; }
 		public string genero { get; set; }
 		public int edad { get; set; }
-		public int identificación { get; set; }
-		public string dirección { get; set; }
-		public int teléfono { get; set; }
+		public int identificaion { get; set; }
+		public string direccion { get; set; }
+		public int telefono { get; set; }
+		public bool estado { get; set; }
 	}
 }

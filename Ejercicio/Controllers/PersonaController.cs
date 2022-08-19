@@ -1,5 +1,6 @@
 ﻿using Ejercicio.Application.Commands;
 using Ejercicio.Application.Commands.Delete;
+using Ejercicio.Application.Commands.Updates;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -25,10 +26,11 @@ namespace Ejercicio.Controllers
             var result = await _mediator.Send(command);
             return Ok(result);
         }
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> UptatePersona(int id)
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UptatePersona(int id, UpdateClientCommand command)
         {
-            return Ok(await _mediator.Send(new DeleteClientCommand { Id = id }));
+            command.Id = id;
+            return Ok(await _mediator.Send(command));
         }
 
         [HttpDelete("{id}")]

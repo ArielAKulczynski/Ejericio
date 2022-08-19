@@ -33,7 +33,8 @@ namespace Ejercicio.Infrastructure.Repositories.Base
         }
         public async Task UpdateAsync(T entity)
         {
-            throw new NotImplementedException();
+            _applicationContext.Set<T>().Update(entity);
+            await _applicationContext.SaveChangesAsync();
         }
 
     }

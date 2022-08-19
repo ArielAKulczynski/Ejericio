@@ -33,21 +33,20 @@ namespace Ejercicio.Infrastructure.Migrations
                 {
                     numeroCuenta = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    PersonaID = table.Column<int>(type: "int", nullable: false),
-                    tipoCuenta = table.Column<int>(type: "int", nullable: false),
+                    ClienteId = table.Column<int>(type: "int", nullable: false),
+                    tipoCuenta = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     saldoInicial = table.Column<int>(type: "int", nullable: false),
-                    estado = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ClienteIdPersonaID = table.Column<int>(type: "int", nullable: true)
+                    estado = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Cuentas", x => x.numeroCuenta);
                     table.ForeignKey(
-                        name: "FK_Cuentas_Clientes_ClienteIdPersonaID",
-                        column: x => x.ClienteIdPersonaID,
+                        name: "FK_Cuentas_Clientes_ClienteId",
+                        column: x => x.ClienteId,
                         principalTable: "Clientes",
                         principalColumn: "PersonaID",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -83,9 +82,9 @@ namespace Ejercicio.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Cuentas_ClienteIdPersonaID",
+                name: "IX_Cuentas_ClienteId",
                 table: "Cuentas",
-                column: "ClienteIdPersonaID");
+                column: "ClienteId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Movimientos_CuentaNumeronumeroCuenta",
